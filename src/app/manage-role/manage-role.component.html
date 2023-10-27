@@ -1,0 +1,25 @@
+<mat-accordion multi="true">
+<button mat-raised-button class="mt-2" color="primary" routerLink="/add-role">Add Role</button>
+<table mat-table [dataSource]="roleDisplay">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-raised-button color="warn" (click)="onEdit(element.id)">Edit</button> &nbsp;
+            <button mat-raised-button color="accent" (click)="onDelete(element.id)">Delete</button> &nbsp;
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns:displayColumns"></tr>
+</table>
+</mat-accordion>
