@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Update Profile</h2>
+<div mat-dialog-content class="profile-dialog-content">
+  <div class="profile-image-container">
+    <img [src]="displayImage" alt="error" class="profile-image">
+    <button mat-icon-button (click)="imageUpload.click()" class="change-image-button"><mat-icon>edit</mat-icon></button>
+    <input hidden type="file" #imageUpload (change)="uploadImage($event)">
+  </div>
+  <form [formGroup]="updateForm" (ngSubmit)="updateProfile()" class="profile-form">
+    <div>
+      <label>Name:</label>
+      <mat-form-field>
+        <input matInput placeholder="Name" formControlName="name" readonly>
+      </mat-form-field>
+    </div>
+    <div>
+      <label>Email:</label>
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email" readonly>
+      </mat-form-field>
+    </div>
+    <div>
+      <label>City:</label>&nbsp;&nbsp;
+      <mat-form-field>
+        <input matInput placeholder="City" formControlName="city" required>
+      </mat-form-field>
+    </div>
+    <div>
+      <label>Mobile:</label>
+      <mat-form-field>
+        <input matInput placeholder="Mobile" formControlName="mobile" required>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" [disabled]="updateForm.invalid" (click)="updateProfile()">Update</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

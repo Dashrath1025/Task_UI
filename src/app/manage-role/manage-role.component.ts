@@ -21,24 +21,24 @@ export class ManageRoleComponent implements OnInit {
   roleId: string | null | undefined;
   displayColumns: string[] = ['id', 'name', 'edit'];
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.roleId = params.get('id');
-      if (this.roleId) {
-        if (this.roleId.toLowerCase() === 'addrole'.toLowerCase()) {
-          this.isNewStudent = true;
-        } else {
-          this.isNewStudent = false;
-          this.api.getRoleId(this.roleId).subscribe(
-            (success) => {
-              console.log(success);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-        }
-      }
-    });
+    // this.route.paramMap.subscribe((params) => {
+    //   this.roleId = params.get('id');
+    //   if (this.roleId) {
+    //     if (this.roleId.toLowerCase() === 'addrole'.toLowerCase()) {
+    //       this.isNewStudent = true;
+    //     } else {
+    //       this.isNewStudent = false;
+    //       this.api.getRoleId(this.roleId).subscribe(
+    //         (success) => {
+    //           console.log(success);
+    //         },
+    //         (error) => {
+    //           console.log(error);
+    //         }
+    //       );
+    //     }
+    //   }
+    // });
 
     this.roleList();
   }

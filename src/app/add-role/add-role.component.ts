@@ -80,7 +80,4 @@ export class AddRoleComponent implements OnInit {
       }
     }
   }
-
-  
-  
 }

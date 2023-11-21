@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User, UserType } from '../Model/model';
-import { Observable } from 'rxjs';
+import { Observable, throwIfEmpty } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -33,67 +33,126 @@ export class ApiService {
     let token = this.jwt.decodeToken();
     console.log(token);
     let user: any = {
-      id:token.id,
+      id: token.id,
       userRole: token.role === 'User' ? UserType.USER : UserType.ADMIN,
     };
     return user;
   }
 
-  getTaskList(){
-    return this.http.get(this.baseUrl+'Tasks/getalltask');
+  getTaskList() {
+    return this.http.get(this.baseUrl + 'Tasks/getalltask');
   }
 
-  addTask(task:any):Observable<any>{
-    return this.http.post(this.baseUrl+'Tasks/addtask/',task);
+  addTask(task: any): Observable<any> {
+    return this.http.post(this.baseUrl + 'Tasks/addtask/', task);
   }
 
-  getRoles(){
-    return this.http.get(this.baseUrl+'Account/getrole')
+  getRoles() {
+    return this.http.get(this.baseUrl + 'Account/getrole');
   }
 
-  uploadImage(userId:string,file:File):Observable<any>{
+  uploadImage(userId: string, file: File): Observable<any> {
     debugger;
-    const formData=new FormData();
-    formData.append('profileImage',file);
-    return this.http.post(this.baseUrl+'Account/'+userId+'/upload',formData,{
-      responseType:'text'
+    const formData = new FormData();
+    formData.append('profileImage', file);
+    return this.http.post(
+      this.baseUrl + 'Account/' + userId + '/upload',
+      formData,
+      {
+        responseType: 'text',
+      }
+    );
+  }
+
+  getImagePath(relativePath: string) {
+    return `${this.imgUrl}/${relativePath}`;
+  }
+
+  getUser(userId: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'Account/' + userId);
+  }
+
+  getAssignUser(userId: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'User/' + userId);
+  }
+
+  getroleName(userId: string) {
+    return this.http.get(this.baseUrl + 'User/getrolename/' + userId, {
+      responseType: 'json',
     });
   }
 
-  getImagePath(relativePath:string){
-    return `${this.imgUrl}/${relativePath}`
+  getRoleList() {
+    return this.http.get<any[]>(this.baseUrl + 'Roles/getrole');
   }
 
-  getUser(userId:string):Observable<any>{
-    return this.http.get<any>(this.baseUrl+'/Account/'+userId);
-  }
-
-  getRoleList(){
-    return this.http.get(this.baseUrl+"Roles/getrole")
-  }
-
-  addrole(role:string){
-    return  this.http.post(this.baseUrl+'Roles/addrole',role,
-    {
-      responseType:'text'
+  addrole(role: string) {
+    return this.http.post(this.baseUrl + 'Roles/addrole', role, {
+      responseType: 'text',
     });
   }
 
-  getRoleId(roleId:string):Observable<any>{
-    return this.http.get<any>(this.baseUrl+"Roles/getid/"+roleId)
+  getRoleId(roleId: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'Roles/getid/' + roleId);
   }
 
-  updateRole(role:any){
-    return this.http.put(this.baseUrl+'Roles/updaterole',role,
-    {
-      responseType:'text'
+  updateRole(role: any) {
+    return this.http.put(this.baseUrl + 'Roles/updaterole', role, {
+      responseType: 'text',
     });
   }
 
-  deleteRole(id:string):Observable<any>{
-    return this.http.delete(this.baseUrl+'Roles/deleterole?id='+id,{
-      responseType:'text'
+  deleteRole(id: string): Observable<any> {
+    return this.http.delete(this.baseUrl + 'Roles/deleterole?id=' + id, {
+      responseType: 'text',
     });
   }
 
+  getAssignRole() {
+    return this.http.get(this.baseUrl + 'User/getroles');
+  }
+
+  getRolesList(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}User/getRolesList`);
+  }
+
+  assignUserRole(email: string, roleName: string): Observable<any> {
+    const params = {
+      userEmail: email,
+      roleName: roleName,
+    };
+    return this.http.post<any>(
+      `${this.baseUrl}User/updaterole`,
+      { responseType: 'text' },
+      { params: params }
+    );
+  }
+
+  lockUnlock(userId: string): Observable<any> {
+    return this.http.post(
+      this.baseUrl + 'User/lockunlock?userId=' + userId,
+      {}
+    );
+  }
+
+  updateProfile(profile: any) {
+    return this.http.put(this.baseUrl + 'Account/updateprofile', profile);
+  }
+
+  getTaskByUser(userId: string): Observable<any> {
+    return this.http.get<any>(
+      this.baseUrl + 'Tasks/gettaskbyuser?userId=' + userId
+    );
+  }
+
+  getTaskById(taskId: number): Observable<any> {
+    return this.http.get<any>(
+      this.baseUrl + 'Tasks/gettaskbyid?taskId=' + taskId
+    );
+  }
+
+  updateStatus(taskId: number, status: string) {
+    return this.http.put(`${this.baseUrl}Tasks/updatestatus?taskId=${taskId}&status=${status}`, null);
+  }
+  
 }

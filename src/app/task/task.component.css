@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.example-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-field {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.small-field {
+    width: 10%;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+}

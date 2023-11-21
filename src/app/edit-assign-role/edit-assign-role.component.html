@@ -1,0 +1,51 @@
+<mat-card class="add-role">
+    <mat-card-header>
+        <mat-card-title>Assign Role</mat-card-title>
+        <!-- <mat-card-title>{{msg}}</mat-card-title> -->
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <form [formGroup]="assignForm">
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>
+                    Email
+                </mat-label>
+                <input readonly formControlName="email" matInput id="email" >
+                <!-- <mat-error *ngIf="this.name.invalid">Required</mat-error> -->
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>
+                    Name
+                </mat-label>
+                <input readonly matInput formControlName="name" id="name">
+                <!-- <mat-error *ngIf="this.name.invalid">Required</mat-error> -->
+            </mat-form-field>
+            <br>
+            <!-- <div class="form-group mt-3">
+                <select formControlName="Role" id="Id" class="form-control">
+                    <option *ngFor="let role of rolesList" [value]="role.id">{{role.name}}</option>
+                </select>
+            </div> -->
+
+            <mat-form-field>
+                <mat-label>Select Role</mat-label>
+                <mat-select formControlName="role" id="Id" >
+                  <mat-option *ngFor="let role of rolesList" [value]="role.id">
+                    {{role.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <br>
+              
+              <button type="submit" mat-raised-button (click)="assignRole()" color="primary">Save</button>          
+
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <!-- <button mat-raised-button color="" (click)="addRole()">Save</button> -->
+    </mat-card-actions>
+</mat-card>

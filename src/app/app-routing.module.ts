@@ -8,6 +8,8 @@ import { AuthorizationGuard } from './Guard/authorization.guard';
 import { TaskComponent } from './task/task.component';
 import { ManageRoleComponent } from './manage-role/manage-role.component';
 import { AddRoleComponent } from './add-role/add-role.component';
+import { AssignRoleComponent } from './assign-role/assign-role.component';
+import { EditAssignRoleComponent } from './edit-assign-role/edit-assign-role.component';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -17,8 +19,8 @@ const routes: Routes = [
   {path:'manage-role',component:ManageRoleComponent},
   {path:'add-role',component:AddRoleComponent},
   {path:'add-role/:id',component:AddRoleComponent},
-
-  
+  {path:'edit-assign-role/:id',component:EditAssignRoleComponent},
+  {path:'assign-role',component:AssignRoleComponent},
 ];
 
 @NgModule({

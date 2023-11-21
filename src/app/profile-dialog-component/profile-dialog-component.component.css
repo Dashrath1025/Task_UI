@@ -1,0 +1,49 @@
+.small-image-width {
+    width: 100px; /* Set the desired width value */
+    /* Add other styling properties as needed */
+}
+
+.profile-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  
+  .profile-image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px; /* Add some margin at the bottom */
+  }
+  
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .change-image-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(30%);
+    right: -30px; /* Adjust the distance from the right */
+  }
+  
+  .profile-form {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 20px; /* Add some margin at the bottom of each form field */
+  }
+  

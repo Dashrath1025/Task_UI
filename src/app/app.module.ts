@@ -14,6 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './Material/material.module';
 import { AddRoleComponent } from './add-role/add-role.component';
 import { AssignRoleComponent } from './assign-role/assign-role.component';
+import { EditAssignRoleComponent } from './edit-assign-role/edit-assign-role.component';
+import { ProfileDialogComponentComponent } from './profile-dialog-component/profile-dialog-component.component';
+import { UpdateStatusComponent } from './update-status/update-status.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { AssignRoleComponent } from './assign-role/assign-role.component';
     TaskComponent,
     ManageRoleComponent,
     AddRoleComponent,
-    AssignRoleComponent
+    AssignRoleComponent,
+    EditAssignRoleComponent,
+    ProfileDialogComponentComponent,
+    UpdateStatusComponent
   ],
   imports: [
     BrowserModule,

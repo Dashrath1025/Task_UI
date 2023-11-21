@@ -1,15 +1,26 @@
-<div class="col-xs-6">
-    <div class="row center-xs">
-        <div class="w-100">
-            <img [src]="displayImage" alt="error" class="w-100">
-        </div>
-    </div>
-</div>
 
 
-<div class="row">
-    <div class="col-xs-12 row center-xs mt-1" *ngIf="isLoggedIn">
-        <input hidden type="file" #imageUpload (change)="uploadImage($event)">
-        <button class="btn btn-warning" (click)="imageUpload.click()">Change Image</button>
-    </div>
-</div>
+  <button mat-raised-button (click)="openProfileDialog()" class="mb-2">Profile</button>
+
+  <div class="card-container">
+    <mat-card class="task-card" *ngFor="let task of taskList">
+      <mat-card-header>
+        <mat-card-title>{{ task.title }}</mat-card-title>
+        <mat-card-subtitle>{{ task.dueDate | date: 'mediumDate' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Description: {{ task.description }}</p>
+        <p>Status: {{ task.status }}</p>
+        <p>Priority: {{ task.priority }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="openDialog(task.taskId)">Update Status</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+  
+  
+
+
+
