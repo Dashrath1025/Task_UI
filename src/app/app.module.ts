@@ -17,6 +17,13 @@ import { AssignRoleComponent } from './assign-role/assign-role.component';
 import { EditAssignRoleComponent } from './edit-assign-role/edit-assign-role.component';
 import { ProfileDialogComponentComponent } from './profile-dialog-component/profile-dialog-component.component';
 import { UpdateStatusComponent } from './update-status/update-status.component';
+import { DatePipe } from '@angular/common';
+import { PageHeaderComponent } from './page-header/page-header.component';
+import { PageFooterComponent } from './page-footer/page-footer.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { ToasterComponent } from './toaster/toaster.component';
+import { ToastrModule } from 'ngx-toastr';
+import { OrderByDueDatePipe } from './order-by-due-date.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +37,12 @@ import { UpdateStatusComponent } from './update-status/update-status.component';
     AssignRoleComponent,
     EditAssignRoleComponent,
     ProfileDialogComponentComponent,
-    UpdateStatusComponent
+    UpdateStatusComponent,
+    PageHeaderComponent,
+    PageFooterComponent,
+    SideNavComponent,
+    ToasterComponent,
+    OrderByDueDatePipe
   ],
   imports: [
     BrowserModule,
@@ -48,9 +60,10 @@ import { UpdateStatusComponent } from './update-status/update-status.component';
         allowedDomains:['localhost:4200']
       }
     }),
+    ToastrModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

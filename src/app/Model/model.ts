@@ -15,3 +15,17 @@ export enum UserType{
     ADMIN,
     USER
 }
+
+export interface SideNvItem{
+    title:string;
+    link:string;
+}
+
+export interface sortItem{
+    taskId:number
+    title:string;
+    description:string;
+    dueDate:string;
+    status:string;
+    priority:string;
+}

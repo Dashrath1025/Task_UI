@@ -1,0 +1,15 @@
+:host {
+    display: block;
+    margin: 3rem auto 0;
+    width: 90%;
+  }
+  
+  .table-container {
+    overflow: auto; /* Ensure the container scrolls if needed */
+  }
+  
+  table {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  

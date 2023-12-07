@@ -1,0 +1,13 @@
+.add-role {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   /* Adjust as needed for the desired height */
+  }
+  
+  .form-container {
+    width: 100%;
+    max-width: 400px; /* Adjust the max-width to your preference */
+  }
+  

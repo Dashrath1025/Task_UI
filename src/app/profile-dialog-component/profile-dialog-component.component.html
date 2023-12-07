@@ -22,12 +22,21 @@
       <label>City:</label>&nbsp;&nbsp;
       <mat-form-field>
         <input matInput placeholder="City" formControlName="city" required>
+        <mat-error *ngIf="updateForm.get('city').hasError('required')">
+          City is required.
+        </mat-error>
       </mat-form-field>
     </div>
     <div>
-      <label>Mobile:</label>
+      <label>Mob No.:</label>
       <mat-form-field>
-        <input matInput placeholder="Mobile" formControlName="mobile" required>
+        <input matInput placeholder="Mobile No." formControlName="mobile" required>
+        <mat-error *ngIf="updateForm.get('mobile').hasError('required')">
+          Mobile No is required.
+        </mat-error>
+        <mat-error *ngIf="updateForm.get('mobile').hasError('pattern')">
+          Mobile No must be exactly 10 digits & only digits are allowed
+        </mat-error>
       </mat-form-field>
     </div>
   </form>

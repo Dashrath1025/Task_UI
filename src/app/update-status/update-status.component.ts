@@ -64,7 +64,6 @@ export class UpdateStatusComponent implements OnInit {
         // Handle successful update if needed
         console.log('Status updated successfully', response);
 
-        
         // Show a snackbar notification
         this.snackBar.open('Status updated successfully', 'Close', {
           duration: 3000, // 3 seconds

@@ -7,6 +7,8 @@ import { Observable, throwIfEmpty } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
+
 export class ApiService {
   baseUrl = 'https://localhost:7011/api/';
   imgUrl = 'https://localhost:7011';
@@ -24,6 +26,11 @@ export class ApiService {
     localStorage.setItem('access_token', token);
   }
 
+  deleteToken(){
+    localStorage.removeItem('access_token');
+   // location.reload();
+  }
+
   isLoggedIn(): boolean {
     return !!localStorage.getItem('access_token');
   }
@@ -31,20 +38,22 @@ export class ApiService {
   getTokenUserInfo(): any {
     if (!this.isLoggedIn()) return null;
     let token = this.jwt.decodeToken();
-    console.log(token);
     let user: any = {
       id: token.id,
+      name:token.name,
       userRole: token.role === 'User' ? UserType.USER : UserType.ADMIN,
     };
     return user;
   }
+
+ 
 
   getTaskList() {
     return this.http.get(this.baseUrl + 'Tasks/getalltask');
   }
 
   addTask(task: any): Observable<any> {
-    return this.http.post(this.baseUrl + 'Tasks/addtask/', task);
+    return this.http.post(this.baseUrl + 'Tasks/addtask/', task,{responseType:'text'});
   }
 
   getRoles() {
@@ -52,7 +61,7 @@ export class ApiService {
   }
 
   uploadImage(userId: string, file: File): Observable<any> {
-    debugger;
+   // debugger;
     const formData = new FormData();
     formData.append('profileImage', file);
     return this.http.post(
@@ -65,6 +74,8 @@ export class ApiService {
   }
 
   getImagePath(relativePath: string) {
+    console.log("relative path",relativePath);
+    
     return `${this.imgUrl}/${relativePath}`;
   }
 
@@ -78,7 +89,7 @@ export class ApiService {
 
   getroleName(userId: string) {
     return this.http.get(this.baseUrl + 'User/getrolename/' + userId, {
-      responseType: 'json',
+      responseType: 'text',
     });
   }
 
@@ -155,4 +166,12 @@ export class ApiService {
     return this.http.put(`${this.baseUrl}Tasks/updatestatus?taskId=${taskId}&status=${status}`, null);
   }
   
+  searchTasks(duedate:Date,status:string,userId:string):Observable<any[]>{
+    const searchUrl=`${this.baseUrl}Tasks/filtertask?dueDate=${duedate}&status=${status}&userId=${userId}`;
+    return this.http.get<any[]>(searchUrl);
+  }
+
+  clearTasks(userId:string):Observable<any>{
+    return this.http.get<any>(this.baseUrl+"Tasks/ClearTasks?userId="+userId);
+  }
 }

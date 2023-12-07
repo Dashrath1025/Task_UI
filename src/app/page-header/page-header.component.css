@@ -1,0 +1,23 @@
+:host{
+    display: block;
+    z-index: 3;
+  }
+  
+  mat-toolbar{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .user-info{
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-info span{
+    margin-right: 0.5rem;
+  }
+  
+  .user-info mat-icon{
+    transform: scale(1.4);
+  }
+  

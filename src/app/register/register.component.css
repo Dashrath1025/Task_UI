@@ -1,18 +1,20 @@
-.example-form {
-    width: 100%;
-  }
-  
-  .form-row {
-    display: flex;
-    margin-bottom: 20px; /* Adjust the gap between rows */
-  }
-  
-  .form-group {
-    flex: 1;
-    margin-right: 20px; /* Adjust the gap between form fields */
-  }
-  
-  .form-group:last-child {
-    margin-right: 0;
-  }
-  
+:host {
+  display: flex;
+  width: 90%;
+  gap: 2rem;
+  margin: 3rem auto;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.add form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.add form button {
+  width: 200px;
+  height: 50px;
+}

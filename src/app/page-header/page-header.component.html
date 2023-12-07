@@ -1,0 +1,38 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="menuClicked.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Task Management System</h1>
+  
+    <div class="user-info">
+      <span *ngIf="isLoggedIn()" >Hi, {{this.api.getTokenUserInfo()?.name | titlecase}}</span>
+      <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+  
+    <mat-menu #userMenu="matMenu">
+
+        <button mat-menu-item routerLink="/register" *ngIf="!isLoggedIn()">
+            <mat-icon>perm_identity</mat-icon>
+            <span>Register</span>
+          </button>
+
+      <button mat-menu-item routerLink="/login" *ngIf="!isLoggedIn()">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </button>
+  
+      <button mat-menu-item *ngIf="isLoggedIn()" (click)="openProfileDialog()">
+        <mat-icon>account_box</mat-icon>
+        <span>Profile</span>
+      </button>
+  
+      <button mat-menu-item *ngIf="isLoggedIn()" (click)="logOut()">
+        <mat-icon>logout</mat-icon>
+        <span>LogOut</span>
+      </button>
+  
+  
+    </mat-menu>
+  </mat-toolbar>

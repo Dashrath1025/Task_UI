@@ -1,0 +1,19 @@
+:host {
+    display: block;
+    margin: 3rem auto 0;
+    width: 90%;
+  }
+  
+  .table-container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the shadow as needed */
+    background-color: white; /* Set the background color to match your table background */
+    overflow: auto; /* Ensure the container scrolls if needed */
+    border-radius: 4px; /* Optional: Add border-radius for a rounded appearance */
+  }
+  
+  
+  table {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  

@@ -1,12 +1,75 @@
+<form (ngSubmit)="onSearch()" ngClass="overflow-hidden mt-5" #filterForm="ngForm" class="form-inline"
+  style="margin-left: 50px;" *ngIf="isLoggedIn()">
+  <div class="row mb-3 justify-content-center">
+    <div class="col-md-4 mb-3">
+      <input class="form-control" placeholder="search by duedate" type="date" id="dueDate" name="dueDate"
+        [(ngModel)]="duedate" />
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <select class="form-control" [(ngModel)]="status" name="status">
+        <option value="">All Status</option>
+        <option *ngFor="let status of statusList" [value]="status">{{status}}</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <button type="submit" class="btn btn-primary">Search</button> &nbsp;
+      <button type="reset" class="btn btn-secondary" (click)="onClear()">Clear</button>
+    </div>
+  </div>
+</form>
+
+<button mat-raised-button color="primary" (click)="sortListByDueDate()" style="margin-left: 10px;">
+  Sort by Due Date
+</button>
 
 
-  <button mat-raised-button (click)="openProfileDialog()" class="mb-2">Profile</button>
 
-  <div class="card-container">
-    <mat-card class="task-card" *ngFor="let task of taskList">
-      <mat-card-header>
+
+
+
+
+<div class="card-container overflow-hidden" style="display: flex; flex-wrap: wrap; margin: 50px;" 
+  *ngIf="searchResult.length>0; else noDataFound ">
+  <mat-card class="task-card overflow-hidden" style="flex: 0 0 calc(33.333% - 20px); margin: 10px;"
+    *ngFor="let task of searchResult">
+    <mat-card-header (click)="checkDueDate(task)">
+      <mat-card-title>{{ task.title }}</mat-card-title>
+      <mat-card-subtitle>{{ task.dueDate | date: 'mediumDate' }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Description: {{ task.description }}</p>
+      <p>Status: {{ task.status }}</p>
+      <p>Priority: {{ task.priority }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="openDialog(task.taskId)">Update Status</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+<ng-template #noDataFound>
+  <div *ngIf="searchPerformed && searchResult.length === 0 else elseBlock2">
+    <div class="alert alert-warning" role="alert" *ngIf="searchPerformed && searchResult.length === 0">
+      No data found for the specified filters.
+    </div>
+  </div>
+
+</ng-template>
+
+
+
+
+<ng-template #elseBlock2>
+  <div class="card-container overflow-hidden"  style="display: flex; flex-wrap: wrap; margin: 50px;"
+    *ngIf="searchResult.length===0 && !sortByDueDateClicked else originalCardList">
+    <mat-card class="task-card overflow-hidden" style="flex: 0 0 calc(33.333% - 20px); margin: 10px;"
+      *ngFor="let task of taskList">
+      <mat-card-header (click)="checkDueDate(task)">
         <mat-card-title>{{ task.title }}</mat-card-title>
-        <mat-card-subtitle>{{ task.dueDate | date: 'mediumDate' }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ task.dueDate | date: 'medium' }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <p>Description: {{ task.description }}</p>
@@ -18,9 +81,30 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  
-  
-  
+</ng-template>
+
+<ng-template #originalCardList>
+  <!-- Display the original card list -->
+  <div class="card-container overflow-hidden"  style="display: flex; flex-wrap: wrap; margin: 50px;"
+  >
+  <mat-card class="task-card overflow-hidden" style="flex: 0 0 calc(33.333% - 20px); margin: 10px;"
+    *ngFor="let task of sortList">
+    <mat-card-header (click)="checkDueDate(task)">
+      <mat-card-title>{{ task.title }}</mat-card-title>
+      <mat-card-subtitle>{{ task.dueDate | date: 'medium' }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Description: {{ task.description }}</p>
+      <p>Status: {{ task.status }}</p>
+      <p>Priority: {{ task.priority }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="openDialog(task.taskId)">Update Status</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+</ng-template>
+
 
 
 

@@ -7,17 +7,19 @@
     <mat-card-content>
 
         <form [formGroup]="roleForm">
-                <mat-form-field appearance="fill" color="accent">
+                <mat-form-field appearance="outline">
                     <mat-label>
                        Role Name
                     </mat-label>
                     <input matInput id="name" formControlName="Name">
-                    <!-- <mat-error *ngIf="this.name.invalid">Required</mat-error> -->
+                    <mat-error *ngIf="roleForm.get('Name')?.hasError('required')">Role Name is Required</mat-error>
                 </mat-form-field>
         </form>
     </mat-card-content>
 
     <mat-card-actions>
-        <button mat-raised-button color="" (click)="addRole()">Save</button>
+        <button mat-raised-button color="primary" (click)="addRole()">Save</button> &nbsp;
+        <button type="submit" mat-raised-button routerLink="/manage-role">Cancel</button>                  
+
     </mat-card-actions>
 </mat-card>

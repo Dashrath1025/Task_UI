@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../Services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-manage-role',
@@ -12,7 +12,8 @@ export class ManageRoleComponent implements OnInit {
   constructor(
     private api: ApiService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
   ) {}
 
   msg:string='';
@@ -67,7 +68,9 @@ export class ManageRoleComponent implements OnInit {
       this.api.deleteRole(id).subscribe(res=>{
         
         this.msg=res;
-        alert(this.msg);
+        this.snackBar.open('Role Delete successfull!', 'Close', {
+          duration: 3000, // Duration in milliseconds
+        });
         this.roleList();
         // if(res){
         //   alert("Role Delete Success");

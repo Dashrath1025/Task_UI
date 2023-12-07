@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../Services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-role',
@@ -19,7 +20,8 @@ export class AddRoleComponent implements OnInit {
     private api: ApiService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
   ) {
     this.roleForm = this.fb.group({
       Name: ['', [Validators.required]],
@@ -60,7 +62,9 @@ export class AddRoleComponent implements OnInit {
         roleData.id = this.role.id;
         this.api.updateRole(roleData).subscribe({
           next: (res: any) => {
-            alert(res);
+            this.snackBar.open('Role Updated successfull!', 'Close', {
+              duration: 3000, // Duration in milliseconds
+            });
             this.router.navigate(['/manage-role']);
           },
           error: (err) => {
@@ -70,7 +74,10 @@ export class AddRoleComponent implements OnInit {
       } else {
         this.api.addrole(roleData).subscribe({
           next: (res: any) => {
-            alert('Role Created successfully');
+            //alert('Role Created successfully');
+            this.snackBar.open('Role Added successfull!', 'Close', {
+              duration: 3000, // Duration in milliseconds
+            });
             this.router.navigate(['/manage-role']);
           },
           error: (err) => {
